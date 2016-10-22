@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("common.css");
+
+.wrapper{ width:1008px;  margin:0 auto; background:url(../images/eaby_repeat-y.png) repeat-y;  }
+.header_bg{ width:1008px;  background:url(../images/ebay_top_bg.png) no-repeat; }
+
+/*  搜索  */
+.kuang{ width:950px; padding:0 0 0 29px; }
+.top{ height:50px;  }
+.power{ width:140px; height:15px; float:left; display:inline; padding:24px 0 0 630px; color:#FFF; }
+.search{ width:156px; height:28px; float:right; padding:6px 10px 0 0; }
+.search_btn{ width:20px; height:20px; float:left; display:inline; margin:5px 0 0 4px; }
+.search_btn a{ width:20px; height:20px; display:block; }
+.search_bg{ width:130px; height:28px; float:right; display:inline; }
+.shufu{ width:130px; height:28px; line-height:28px; background:transparent; border:none; }
+
+/*  产品  */
+.product{ width:950px; margin-top:15px; }
+.product_left{ width:760px; float:left; }
+.product_left ul li{ float:left; display:inline; margin:0px; _margin:-4px 0 0 0;}
+.product_left ul li a{ width:190px; height:150px; display:block; vertical-align:middle; text-align:center; }
+.product_left_alpha { filter: alpha(opacity=50); opacity:0.5;}
+.product_right{ width:190px; float:right; }
+
+.btn_1{ width:175px; height:139px; display:block; background:url(../images/button.png) no-repeat; margin-top:10px;  }
+.btn_1:hover{ background:url(../images/button.png) no-repeat -175px 0;  }
+
+.btn_2{ width:175px; height:60px; display:block;  background:url(../images/button.png) no-repeat 0 -139px; margin-top:10px; }
+.btn_2:hover{ background:url(../images/button.png) no-repeat -175px -139px;  }
+
+.btn_3{ width:175px; height:60px; display:block;  background:url(../images/button.png) no-repeat 0 -199px; margin-top:10px;  }
+.btn_3:hover{ background:url(../images/button.png) no-repeat -175px -199px; }
+
+.btn_1_off{ width:175px; height:139px; display:block; background:url(../images/button_off.png) no-repeat; margin-top:10px;  }
+.btn_1_off:hover{ background:url(../images/button_off.png) no-repeat -175px 0;  }
+
+.btn_2_off{ width:175px; height:60px; display:block;  background:url(../images/button_off.png) no-repeat 0 -139px; margin-top:10px; }
+.btn_2_off:hover{ background:url(../images/button_off.png) no-repeat -175px -139px;  }
+
+.btn_3_off{ width:175px; height:60px; display:block;  background:url(../images/button_off.png) no-repeat 0 -199px; margin-top:10px;  }
+.btn_3_off:hover{ background:url(../images/button_off.png) no-repeat -175px -199px; }
+
+/*  产品  */
+.d-p{ width:714px; margin-top:-3px; background:url(../images/d_con_bg.png) repeat-y;  }
+.derection{ width:714px; height:80px; background:url(../images/descripition.png); font-size:20px; font-weight:bold; color:#FFF; line-height:80px; text-indent:60px; }
+.d_text{ font-size:14px; width:630px; margin:0px 25px; padding-bottom:30px; line-height:1.8em; border-bottom:1px solid #dddedb; overflow:hidden}
+.preview{ width:250px; height:62px; margin-top:15px; line-height:62px; background:url(../images/preview.png); font-size:20px; font-weight:bold; color:#FFF; text-indent:60px;  }
+.big_img{ width:680px; margin:15px 0 0 18px; overflow:hidden}
+.big_img img{ max-width:650px; _width:650px; overflow:hidden;}
+
+.w_bottom{ width:950px; margin-top:20px; }
+.w_left{ width::715px; float:left; display:inline; overflow:hidden}
+.seck{ width:714px; background:url(../images/pp3.png) repeat-y;}
+.seck_text{ width:170px; height:40px; line-height:40px; font-size:20px; font-weight:bold; color:#fff; padding:10px 0 0 15px;  }
+.tuangou{ width:680px; height:182px; background:url(../images/tuangou.png) no-repeat; margin:10px 0 0 15px; }
+.seck_img{ width:284px; float:left; display:inline; height:173px; padding:1px 0 0 1px;  }
+.miaosu{ width:380px; height:170px; float:right; display:inline;  }
+.seck_biaoti{ width:326px; height:60px; margin-top:10px; line-height:22px; font-size:20px; font-weight:bold; color:#444; text-align:right;  }
+.seck_price{ width:120px; height:70px; font-size:12px; font-weight:bold; color:#fff; margin:10px 0 0 255px; }
+.w_recommend{ width:713px; height:295px; margin-top:10px;  background:url(../images/recommend.png) no-repeat;}
+.re_img{ width:680px; height:auto; padding:5px 0 0 16px; }
+.re_img ul li{ float:left; display:inline; margin-left:20px; margin-top:20px; }
+
+/*  tab  */
+.tab_w{ width:706px; height:270px; }
+
+
+.w_right{ width:230px; float:right; display:inline; overflow:hidden}
+.w_cate{ width:230px; }
+.w_cate_biaoti{ width:230px; height:68px; background:url(../images/cat_top.png) no-repeat; line-height:65px; color:#fff; text-indent:20px;  font-size:20px; font-weight:bold; }
+.act{ width:230px; height:36px; line-height:36px; text-indent:30px; text-decoration:none; color:#FFF; font-size:16px; font-weight:bold; display:block; background:url(../images/cat_act.png) no-repeat top right; }
+.act:hover{ text-decoration:none; color:#ea1e1e; font-size:16px;  background:url(../images/cat_act.png) no-repeat bottom right; }
+.top5{ width:224px; margin:20px 0 0 6px; background:url(../images/pp1.png) repeat-y; }
+.t_top{ width:224px; height:44px; background:url(../images/top5.png) no-repeat top;}
+.t_bottom{ width:224px; height:20px; background:url(../images/top5.png) no-repeat bottom;}
+.tupian{ width:200px; height:20xpx; padding:10px 0 0 10px; }
+
+.new_product{ width:227px; margin:20px 0 0 3px; background:url(../images/pp2.png) repeat-y; }
+.t_top1{ width:227px; height:44px; background:url(../images/new_prod.png) no-repeat top;}
+.t_bottom1{ width:227px; height:20px; background:url(../images/new_prod.png) no-repeat bottom;}
+
+.tupian1{ width:200px; height:20xpx; padding:12px 0 0 12px; }
+.lan_btn{ width:225px; height:56px; margin:5px 0 0 5px; }
+.lan_btn a{ width:220px; height:52px; display:block; background:url(../images/isfes.png);  }
+
+
+.d_bottom{ width:714px; height:19px;  background:url(../images/d_bottom.png) no-repeat; }
+
+.ww_top{ width:714px; height:60px; background:url(../images/seck.png) no-repeat top; line-height:60px; font-size:20px; text-indent:20px; font-weight:bold; color:#fff; }
+.ww_bottom{ width:714px; height:30px; background:url(../images/seck.png) no-repeat bottom; }
+
+.recommend{ width:713px; background:url(../images/pp4.png) repeat-y; }
+.ww_top1{ width:713px; height:60px; background:url(../images/recommend.png) no-repeat top; line-height:63px; font-size:20px; text-indent:20px; font-weight:bold; color:#fff; }
+.ww_bottom1{ width:713px; height:30px; background:url(../images/recommend.png) no-repeat bottom; }
+
+.buy_table_font { color:#F06; font-weight:bold; font-size:18px;}

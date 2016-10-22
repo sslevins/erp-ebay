@@ -1,0 +1,26 @@
+#center{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 800px; 
+}
+.tabBq {	
+	border-color: transparent;
+	height: 8.0cm;
+	width: 7.5cm;
+	table-layout: fixed;
+	word-wrap: break-word;
+	border:1px;
+}
+
+.tab_td {
+   border:1px dashed #000;
+}
+.peihuo{
+   width: 7.5cm;
+   word-wrap:break-word;
+}
+#peihuo1{
+  width: 7.5cm;
+  height: auto;
+}

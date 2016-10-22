@@ -1,0 +1,327 @@
+<?php
+include "include/config.php";
+
+
+include "top.php";
+
+
+
+
+	
+	
+	if($_POST['submit']){
+		$feedbackstring						 = mysql_escape_string($_POST['feedbackstring']);			// 订单默认库存
+		$storeid							 = $_POST['storeid'];			// 订单默认库存
+		$notesorderstatus					 = $_POST['notesorderstatus'];  // 是否是有留言的订单
+		$auditcompleteorderstatus			 = $_POST['auditcompleteorderstatus'];  // 是否是有留言的订单
+		$overweightstatus					 = $_POST['overweightstatus'];  // 超重订单
+		$systemprofit						 = $_POST['systemprofit'];			// 订单默认库存
+		$days30								 = $_POST['days30'];			// 订单默认库存
+		$days15								 = $_POST['days15'];			// 订单默认库存
+		$days7								 = $_POST['days7'];			// 订单默认库存
+		$hackorer							 = $_POST['hackorer'];			// 订单默认库存
+		$overtock							 = $_POST['overtock'];			// 订单默认库存
+		$totalprofitstatus					 = $_POST['totalprofitstatus'];			// 订单默认库存
+		
+		$sql		 = "UPDATE `ebay_config` SET storeid='$storeid',notesorderstatus='$notesorderstatus',auditcompleteorderstatus='$auditcompleteorderstatus',days30='$days30',days15='$days15',days7='$days7',overweightstatus='$overweightstatus',overtock='$overtock',hackorer='$hackorer',totalprofitstatus ='$totalprofitstatus',systemprofit='$systemprofit',feedbackstring='$feedbackstring' WHERE `ebay_user` ='$user' LIMIT 1";
+		
+		
+
+		
+		if($dbcon->execute($sql)){
+			
+			$status	= " -[<font color='#33CC33'>操作记录: 数据保存成功</font>]";
+		}else{
+		
+			$status = " -[<font color='#FF0000'>操作记录: 数据保存失败</font>]";
+		}
+	}
+	
+	
+	
+	$ss		= "select * from ebay_config WHERE `ebay_user` ='$user' LIMIT 1";
+	$ss		= $dbcon->execute($ss);
+	$ss		= $dbcon->getResultArray($ss);
+	
+	
+	print_r($ss);
+	
+	$storeid						= $ss[0]['storeid'];			// 订单默认占用仓库:
+	$notesorderstatus				= $ss[0]['notesorderstatus'];	// 订单默认占用仓库:
+	$auditcompleteorderstatus		= $ss[0]['auditcompleteorderstatus']; //订单核对成功后，转入
+	$days30							= $ss[0]['days30'];			// 订单默认占用仓库:
+	$days15							= $ss[0]['days15'];			// 订单默认占用仓库:
+	$days7							= $ss[0]['days7'];			// 订单默认占用仓库:
+	$overweightstatus				= $ss[0]['overweightstatus'];			// 订单默认占用仓库:
+	$overtock						= $ss[0]['overtock'];			// 订单默认占用仓库:
+	$totalprofitstatus				= $ss[0]['totalprofitstatus'];			// 遇到有hei名单订单时，应该转入哪个分类
+	$hackorer						= $ss[0]['hackorer'];			// 遇到有hei名单订单时，应该转入哪个分类
+	$systemprofit					= $ss[0]['systemprofit'];			// 遇到有hei名单订单时，应该转入哪个分类
+	$feedbackstring					= $ss[0]['feedbackstring'];
+	
+ ?>
+<div id="main">
+    <div id="content" >
+        <table style="width:100%"><tr><td><div class='moduleTitle'>
+<h2><?php echo '系统配置'.$status;?></h2>
+</div>
+ 
+<div class='listViewBody'>
+
+
+<div id='Accountsbasic_searchSearchForm' style='' class="edit view search basic">
+ <input name="hiddenuserid" type="hidden" value="" id="hiddenuserid" />
+ 
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+	
+	
+		
+	<td nowrap="nowrap" scope="row" >&nbsp;</td>
+	</tr>
+</table>
+</div>
+<div id='Accountsadvanced_searchSearchForm' style='display:none' class="edit view search advanced"></div>
+<div id='Accountssaved_viewsSearchForm' style='display: none';></div>
+</form>
+ 
+<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	<tr class='pagination'>
+		<td width="26%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>			
+                      <form id="form" name="form" method="post" action="systemconfig.php?module=system&action=系统配置">
+                  <table width="73%" border="0" align="center" cellspacing="0" class="left_txt">
+                    <tr>
+                      <td width="35%">1.订单默认占用仓库：
+                        <select name="storeid" id="storeid">
+                          <option value="">未设置</option>
+                          <?php 
+
+							
+
+							$sql = "select * from  ebay_store where ebay_user='$user'";									
+							$sql = $dbcon->execute($sql);
+							$sql = $dbcon->getResultArray($sql);
+							for($i=0;$i<count($sql);$i++){
+
+								$id					= $sql[$i]['id'];
+								$store_name			= $sql[$i]['store_name'];
+								$goods_sku			= $sql[$i]['goods_sku'];	
+								$goods_sx			= $sql[$i]['goods_sx'];	
+								$goods_xx			= $sql[$i]['goods_xx'];	
+							?>
+                          <option value="<?php echo $id;?>" <?php if($id ==$storeid) echo "selected=selected";?>><?php echo $store_name; ?></option>
+                          <?php
+							}
+							?>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>2.有notes或有message，订单同步过来后进入：
+                        <select name="notesorderstatus" id="notesorderstatus">
+                          <option value="" <?php if($notesorderstatus == "") echo "selected=selected" ?>>未设置</option>
+                          <option value="100" <?php if($notesorderstatus == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0" <?php   if($notesorderstatus == "0")  echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1" <?php   if($notesorderstatus == "1")  echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+
+							$ss		= "select * from ebay_topmenu where ebay_user='$user' and name != '' order by ordernumber";
+							$ss		= $dbcon->execute($ss);
+							$ss		= $dbcon->getResultArray($ss);
+							for($i=0;$i<count($ss);$i++){
+
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($notesorderstatus == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($notesorderstatus == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>3.订单核对成功后，转入：
+                        <select name="auditcompleteorderstatus" id="auditcompleteorderstatus">
+                          <option value="" <?php if($auditcompleteorderstatus == "") echo "selected=selected" ?>>未设置</option>
+                          <option value="100" <?php if($auditcompleteorderstatus == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0" <?php   if($auditcompleteorderstatus == "0")  echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1" <?php   if($auditcompleteorderstatus == "1")  echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+
+
+
+				
+							for($i=0;$i<count($ss);$i++){
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+
+								
+
+							
+
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($auditcompleteorderstatus == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($auditcompleteorderstatus == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td><br />
+                      4.单个产品，平均每天销量计算公式，用于系统MRP计算,由系统自身，生成采购建议订单：</td>
+                    </tr>
+                    <tr>
+                      <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="39%">过去7天， 平均每天销量占</td>
+                          <td width="61%"><input name="days7" type="text" id="days7" value="<?php echo $days7;?>" />
+                            &nbsp;假设是50%,请输入 0.5 小数。</td>
+                        </tr>
+                        <tr>
+                          <td>过去15天，平均每天销量占</td>
+                          <td><input name="days15" type="text" id="days15" value="<?php echo $days15;?>" /></td>
+                        </tr>
+                        <tr>
+                          <td>过去30天，平均每天销量占</td>
+                          <td><input name="days30" type="text" id="days30" value="<?php echo $days30;?>" /></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">单个产品每天销量 = 7天平均每天销量 * 百分比 +  15天平均每天销量 * 百分比 +  30天平均每天销量 * 百分比，每个产品的库存报警天数可在货品资料中去设置</td>
+                          </tr>
+                      </table></td>
+                    </tr>
+                    <tr>
+                      <td>5.当订单中的产品超过2kg 的时候，应该转入
+                        <select name="overweightstatus" id="overweightstatus">
+                          <option value="" <?php if($overweightstatus == "") echo "selected=selected" ?>>未设置</option>
+                          <option value="100" <?php if($overweightstatus == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0" <?php   if($overweightstatus == "0")  echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1" <?php   if($overweightstatus == "1")  echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+							for($i=0;$i<count($ss);$i++){
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($overweightstatus == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($overweightstatus == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>6.当订单中的物品，进行配货，无库存时，应该转入
+                        <select name="overtock" id="overtock">
+                          <option value="" <?php if($overtock == "") echo "selected=selected" ?>>未设置</option>
+                          <option value="100" <?php if($overtock == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0" <?php   if($overtock == "0")  echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1" <?php   if($overtock == "1")  echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+
+
+
+							for($i=0;$i<count($ss);$i++){
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($overtock == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($overtock == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>7.当遇到黑名单订单时，自动转入
+                        <select name="hackorer" id="hackorer">
+                          <option value=""     <?php   if($hackorer == "")     echo "selected=selected" ?>>未设置</option>
+                          <option value="100"  <?php   if($hackorer == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0"    <?php   if($hackorer == "0")    echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1"    <?php   if($hackorer == "1")    echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+
+
+
+							for($i=0;$i<count($ss);$i++){
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($hackorer == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($hackorer == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>8.当利润小于
+                        <input name="systemprofit" type="text" id="systemprofit" value="<?php echo $systemprofit;?>" />
+                        时，自动转入
+                        <select name="totalprofitstatus" id="totalprofitstatus">
+                          <option value=""     <?php   if($totalprofit == "")     echo "selected=selected" ?>>未设置</option>
+                          <option value="100"  <?php   if($totalprofit == "100")  echo "selected=selected" ?>>所有订单</option>
+                          <option value="0"    <?php   if($totalprofit == "0")    echo "selected=selected" ?>>未付款订单</option>
+                          <option value="1"    <?php   if($totalprofit == "1")    echo "selected=selected" ?>>待处理订单</option>
+                          <?php
+
+							for($i=0;$i<count($ss);$i++){
+								$ssid		= $ss[$i]['id'];
+								$ssname		= $ss[$i]['name'];
+							?>
+                          <option value="<?php echo $ssid; ?>" <?php  if($totalprofitstatus == $ssid)  echo "selected=selected" ?>><?php echo $ssname; ?></option>
+                          <?php } ?>
+                          <option value="2" <?php  if($totalprofit == '2')  echo "selected=selected" ?>>已经发货</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td>9.当订单标记发出时，立即给客户留下评价,每句评介请用&amp;&amp;分开：<br />
+                        <textarea name="feedbackstring" cols="100" rows="10" id="feedbackstring"><?php echo $feedbackstring;?></textarea>
+                        <br />
+                      <br /></td>
+                    </tr>
+                    <tr>
+                      <td><input name="submit" type="submit" value="提交" onClick="return check()">
+                        &nbsp;</td>
+                      </tr>
+                  </table>
+                  </form>
+					  <p>&nbsp;</p>
+				    <p>&nbsp;</p>
+				    <p>&nbsp;</p>
+				    <p>&nbsp;</p></td>
+			    </tr>
+			</table>		</td>
+	</tr>
+
+              
+		<tr class='pagination'>
+		<td>
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'></td>
+					</tr>
+			</table>		</td>
+	</tr></table>
+
+
+    <div class="clear"></div>
+
+<script language="javascript">
+	
+	function check(){
+	
+		var pas1	= document.getElementById('pass1').value;
+		var pas2	= document.getElementById('pass2').value;
+		
+		if(pas1 == "" || pas2 == ""){
+		
+			alert('请输入密码');
+			return false;
+		}
+		
+		if(pas1 != pas2){
+			
+			alert('两次输入法的密码不一至');
+			return false;
+		
+		}
+	
+	}
+
+
+
+</script>

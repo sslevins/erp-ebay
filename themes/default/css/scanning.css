@@ -1,0 +1,54 @@
+body{
+	margin:0 auto;
+	padding:0;
+	width:200px;
+	font-size:12px;
+}
+.main{
+	min-height:200px;
+	_height:expression((document.documentElement.clientHeight||document.body.clientHeight)>200?"200px":""); 
+	background-color:#ffffff;
+	border:1px solid #000000;
+	padding:5px;
+	margin:5px;
+	line-height:20px;
+}
+.wupin{
+	display:none;
+}
+input{
+	width:60px;
+}
+table{
+	display:none;
+	padding:0;
+}
+tr{
+	height:14px;
+}
+td{
+	margin:0;
+	width:30px;
+    	height: 14px;
+    	line-height: 14px;
+    	margin: 0;
+    	padding: 0;
+}
+#num{
+	width:30px;
+}
+#news{
+	display:none;
+}
+#msg{
+	display:none;
+}
+.sku{
+	width:80px;
+}
+#order{
+	width:100px;
+}
+#name{
+	width:100px;
+}
